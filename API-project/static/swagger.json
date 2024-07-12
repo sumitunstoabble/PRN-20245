@@ -1,0 +1,227 @@
+{
+  "swagger": "2.0",
+  "info": {
+      "description": "This is a sample server Train Running Status server.",
+      "version": "1.0.0",
+      "title": "Train Running Status API",
+      "contact": {
+          "email": "youremail@example.com"
+      }
+  },
+  "host": "localhost:5000",
+  "basePath": "/api/v1",
+  "tags": [
+      {
+          "name": "train",
+          "description": "Operations about train"
+      }
+  ],
+  "schemes": [
+      "http"
+  ],
+  "paths": {
+      "/train_status": {
+          "post": {
+              "tags": [
+                  "train"
+              ],
+              "summary": "Get train status",
+              "description": "Returns train running status",
+              "operationId": "trainStatus",
+              "consumes": [
+                  "application/json"
+              ],
+              "produces": [
+                  "application/json"
+              ],
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "description": "Train status request",
+                      "required": true,
+                      "schema": {
+                          "$ref": "#/definitions/TrainStatusRequest"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "successful operation",
+                      "schema": {
+                          "$ref": "#/definitions/TrainStatusResponse"
+                      }
+                  },
+                  "400": {
+                      "description": "Invalid input"
+                  },
+                  "500": {
+                      "description": "Server error"
+                  }
+              }
+          }
+      },
+      "/select_date": {
+          "post": {
+              "tags": [
+                  "train"
+              ],
+              "summary": "Select journey date",
+              "description": "Returns train running status for the selected date",
+              "operationId": "selectDate",
+              "consumes": [
+                  "application/json"
+              ],
+              "produces": [
+                  "application/json"
+              ],
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "description": "Select date request",
+                      "required": true,
+                      "schema": {
+                          "$ref": "#/definitions/SelectDateRequest"
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "successful operation",
+                      "schema": {
+                          "$ref": "#/definitions/SelectDateResponse"
+                      }
+                  },
+                  "400": {
+                      "description": "Invalid input"
+                  },
+                  "500": {
+                      "description": "Server error"
+                  }
+              }
+          }
+      }
+  },
+  "definitions": {
+      "TrainStatusRequest": {
+          "type": "object",
+          "required": [
+              "trainNumber"
+          ],
+          "properties": {
+              "trainNumber": {
+                  "type": "string",
+                  "example": "12345"
+              }
+          }
+      },
+      "TrainStatusResponse": {
+          "type": "object",
+          "properties": {
+              "trainData": {
+                  "type": "array",
+                  "items": {
+                      "$ref": "#/definitions/TrainStation"
+                  }
+              },
+              "availableDates": {
+                  "type": "array",
+                  "items": {
+                      "type": "string"
+                  }
+              },
+              "currentStation": {
+                  "type": "string"
+              },
+              "trainNumber": {
+                  "type": "string"
+              },
+              "trainName": {
+                  "type": "string"
+              },
+              "selectedDate": {
+                  "type": "string"
+              }
+          }
+      },
+      "SelectDateRequest": {
+          "type": "object",
+          "required": [
+              "trainNumber",
+              "selectedDate"
+          ],
+          "properties": {
+              "trainNumber": {
+                  "type": "string",
+                  "example": "12345"
+              },
+              "selectedDate": {
+                  "type": "string",
+                  "example": "26-May-2024"
+              }
+          }
+      },
+      "SelectDateResponse": {
+          "type": "object",
+          "properties": {
+              "trainData": {
+                  "type": "array",
+                  "items": {
+                      "$ref": "#/definitions/TrainStation"
+                  }
+              },
+              "availableDates": {
+                  "type": "array",
+                  "items": {
+                      "type": "string"
+                  }
+              },
+              "currentStation": {
+                  "type": "string"
+              },
+              "trainNumber": {
+                  "type": "string"
+              },
+              "trainName": {
+                  "type": "string"
+              },
+              "selectedDate": {
+                  "type": "string"
+              }
+          }
+      },
+      "TrainStation": {
+          "type": "object",
+          "properties": {
+              "TrainNumber": {
+                  "type": "string"
+              },
+              "TrainName": {
+                  "type": "string"
+              },
+              "JourneyDate": {
+                  "type": "string"
+              },
+              "StationName": {
+                  "type": "string"
+              },
+              "Date": {
+                  "type": "string"
+              },
+              "ArrivalTime": {
+                  "type": "string"
+              },
+              "DepartureTime": {
+                  "type": "string"
+              },
+              "Delay": {
+                  "type": "string"
+              },
+              "DistanceKm": {
+                  "type": "integer"
+              }
+          }
+      }
+  }
+}

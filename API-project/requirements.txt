@@ -1,0 +1,12 @@
+pandas
+numpy 
+flask
+bs4
+requests
+fake-useragent
+Gunicorn
+autoscraper
+cryptography
+flask_limiter
+flask_swagger_ui
+flask_cors
